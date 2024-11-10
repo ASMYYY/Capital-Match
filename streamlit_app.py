@@ -64,8 +64,11 @@ def main():
                 st.session_state.page = 2
                 st.session_state.customer_id = customer_id
 
-        # Display single image below the search box
-        st.image("path/to/image1.jpg", caption="AI-powered tool for personalized recommendations", use_container_width=True)
+        # Display single image below the search box with a corrected path
+        try:
+            st.image("image1.jpg", caption="AI-powered tool for personalized recommendations", use_container_width=True)
+        except Exception as e:
+            st.error("Could not load image. Please ensure 'image1.jpg' exists in the application directory.")
 
         st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>", unsafe_allow_html=True)
 
