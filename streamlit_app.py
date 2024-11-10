@@ -62,8 +62,8 @@ def main():
                 st.session_state.customer_id = customer_id
 
         # Display images below the search box
-        st.image("./path/to/your/image1.png", caption="AI-powered tool for personalized recommendations", use_column_width=True)
-        st.image("./path/to/your/image2.png", caption="Capital Match - Empowering Capital One's customer experience", use_column_width=True)
+        #st.image("./path/to/your/image1.png", caption="AI-powered tool for personalized recommendations", use_column_width=True)
+       # st.image("./path/to/your/image2.png", caption="Capital Match - Empowering Capital One's customer experience", use_column_width=True)
 
         st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>", unsafe_allow_html=True)
 
