@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 import pandas as pd
 import requests
@@ -268,8 +270,10 @@ def main():
     # Search interface
     customer_id = st.text_input("Enter Customer ID", placeholder="e.g., AlisonGaines78")
     search_clicked = st.button("🔍 Search Customer")
+    if st.session_state.get('main_button') is not True:
+        st.session_state['main_button'] = search_clicked
 
-    if search_clicked:
+    if st.session_state['main_button'] is True:
         if customer_id:
             customer_details = get_customer_details(customer_id)
 
@@ -295,18 +299,18 @@ def main():
                 st.markdown("</div>", unsafe_allow_html=True)
 
                 # Existing Products Section
-                st.markdown("<div class='content-section'>", unsafe_allow_html=True)
-                st.markdown("<h3>Existing Products</h3>", unsafe_allow_html=True)
-                existing_products = [product for product, status in customer_details.items()
-                                     if
-                                     status == "Yes" and product not in ['CustomerID', 'FirstName', 'LastName', 'Phone',
-                                                                         'Email']]
-                if existing_products:
-                    for product in existing_products:
-                        st.markdown(f"<span class='product-tag'>{product}</span>", unsafe_allow_html=True)
-                else:
-                    st.write("No products yet.")
-                st.markdown("</div>", unsafe_allow_html=True)
+                # st.markdown("<div class='content-section'>", unsafe_allow_html=True)
+                # st.markdown("<h3>Existing Products</h3>", unsafe_allow_html=True)
+                # existing_products = [product for product, status in customer_details.items()
+                #                      if
+                #                      status == "Yes" and product not in ['CustomerID', 'FirstName', 'LastName', 'Phone',
+                #                                                          'Email']]
+                # if existing_products:
+                #     for product in existing_products:
+                #         st.markdown(f"<span class='product-tag'>{product}</span>", unsafe_allow_html=True)
+                # else:
+                #     st.write("No products yet.")
+                # st.markdown("</div>", unsafe_allow_html=True)
 
                 # Recommendations Section
                 st.markdown("<div class='content-section'>", unsafe_allow_html=True)
@@ -317,11 +321,17 @@ def main():
 
                 email_clicked = st.button("📧 Send Email")
                 if email_clicked:
+                    with st.spinner('Generating email...'):
+                        time.sleep(3)
                     st.markdown("<div class='content-section'>", unsafe_allow_html=True)
                     st.markdown("<h3>Email Draft</h3>", unsafe_allow_html=True)
                     mail_content = get_email_content(recommended_products)
                     st.write(mail_content if mail_content else "No content available.")
                     st.markdown("</div>", unsafe_allow_html=True)
+                exit_but = st.button("Home", key='home')
+                if exit_but:
+                    del st.session_state['main_button']
+                    st.rerun()
 
 
             else:
@@ -330,7 +340,7 @@ def main():
             st.warning("Please enter a Customer ID to search.")
 
     # Footer
-    st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>",
+    st.markdown("<div class='footer'>© 2024 Capital One | Empowered by AI-Driven Insights</div>",
                 unsafe_allow_html=True)
 
 

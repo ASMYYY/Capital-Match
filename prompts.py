@@ -16,7 +16,7 @@ Recommendation:
 """
 
 mail_prompt = """
-Based in the product recommendation and the benefits of the product draft a short email. Add the signature as Bob Ross, Customer Service Manager
+Based in the product recommendation and the benefits of the product draft a short email. Add the signature as Capital One
 Recommendation: {product_recommendation}
 Mail:
 """
