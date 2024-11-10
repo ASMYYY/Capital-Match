@@ -14,3 +14,11 @@ Customer Analysis: {customer_analysis}
 Available Products: {product_info}
 Recommendation:
 """
+
+mail_prompt = """
+Based in the product recommendation and the benefits of the product draft a short email. Add the signature as Bob Ross, Customer Service Manager
+Recommendation: {product_recommendation}
+Mail:
+"""
+
+sample_reco = {"recommendation": "Based on Alison's financial needs and profile, I recommend the Visa Gold credit card and a High-Yield Savings Account. The Visa est rates, addressing her need for efficient cash management and investment opportunities."}

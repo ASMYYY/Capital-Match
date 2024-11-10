@@ -6,6 +6,7 @@ import base64
 from PIL import Image
 from pathlib import Path
 
+from app import recommendations
 
 image = Image.open('image1.jpg')
 # Load customer data from JSON in the 'data' folder
@@ -66,6 +67,26 @@ def get_recommendations(customer_id):
         st.error("Error connecting to the recommendation service.")
         return []
 
+def get_email_content(recommendation):
+    print("INside email content api!")
+    url = "http://127.0.0.1:8000/product/mail-content"
+    headers = {"Content-Type": "application/json"}
+    data = {"product_recommendation": recommendation}
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        if response.status_code == 200:
+            response = response.json().get("mail", "")
+            if isinstance(response, str):
+                return response
+            else:
+                st.error("Invalid mail format received.")
+                return ""
+        else:
+            st.error("Failed to fetch mail. Please try again later.")
+            return []
+    except requests.exceptions.RequestException:
+        st.error("Error connecting to the mail service.")
+        return []
 
 # Streamlit App
 def main():
@@ -293,6 +314,15 @@ def main():
                 recommended_products = get_recommendations(customer_id)
                 st.write(recommended_products if recommended_products else "No recommendations available.")
                 st.markdown("</div>", unsafe_allow_html=True)
+
+                email_clicked = st.button("📧 Send Email")
+                if email_clicked:
+                    st.markdown("<div class='content-section'>", unsafe_allow_html=True)
+                    st.markdown("<h3>Email Draft</h3>", unsafe_allow_html=True)
+                    mail_content = get_email_content(recommended_products)
+                    st.write(mail_content if mail_content else "No content available.")
+                    st.markdown("</div>", unsafe_allow_html=True)
+
 
             else:
                 st.error("Customer not found. Please try again.")

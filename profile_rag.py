@@ -25,6 +25,7 @@ class ProfileRAG:
         self.product_dataset = json.load(open("data/products.json"))
         self.embeddings_model_name = "BAAI/bge-small-en"
         self.documents = []
+        self.customer_id = None
 
     def setup_chain(self):
         first_prompt = PromptTemplate(input_variables=["query"], template=self.prompt1)
@@ -53,6 +54,7 @@ class ProfileRAG:
         self.db = FAISS.from_documents(self.documents, self.embeddings)
 
     def generate_recommendation(self, customer_id: str):
+        self.customer_id = customer_id
         retriever = self.db.as_retriever(search_type="similarity", search_kwargs={"k": 1})
         retrieved_documents = retriever.get_relevant_documents(customer_id)
         customer_info = "\n".join([doc.page_content for doc in retrieved_documents])
