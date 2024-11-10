@@ -16,7 +16,7 @@ class ProfileRAG:
         self.llm = ChatGroq(
             model="llama3-70b-8192",
             temperature=1,
-            max_tokens=1024,
+            max_tokens=400,
             top_p=1
         )
         self.prompt1 = prompt1
@@ -53,7 +53,7 @@ class ProfileRAG:
         self.db = FAISS.from_documents(self.documents, self.embeddings)
 
     def generate_recommendation(self, customer_id: str):
-        retriever = self.db.as_retriever(search_type="similarity", search_kwargs={"k": 3})
+        retriever = self.db.as_retriever(search_type="similarity", search_kwargs={"k": 1})
         retrieved_documents = retriever.get_relevant_documents(customer_id)
         customer_info = "\n".join([doc.page_content for doc in retrieved_documents])
 

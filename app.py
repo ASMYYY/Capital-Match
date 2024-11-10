@@ -17,11 +17,11 @@ def index():
 @app.post('/product/recommend')
 def recommendations(data: UserQuery):
     print('????',data)
-    # data = data.dict()
-    candidate_id = data['input']['candidate_id']
+    data = data.dict()
+    candidate_id = data['candidate_id']
 
     result = obj.generate_recommendation(customer_id=candidate_id)
-
+    print(result)
     return result
 
 

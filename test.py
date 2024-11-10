@@ -9,3 +9,4 @@ response = requests.post(url, headers=headers, json=data)
 # Print the response
 print(response.status_code)
 print(response.json())  # If the response is in JSON format
+print(response.json().get('recommendation'))
