@@ -1,4 +1,5 @@
 # Capital Match - TAMU Datathon
+This is a POC we built for the best financial hack challenge by Capital One at the TAMU Datathon 2024.
 ## Inspiration
 Sales teams often face challenges when trying to connect with the right customers for the right products. The vast amount of data available about customer preferences, purchase history, and product interest can be overwhelming to sift through manually. Inspired by the potential to make sales campaigns more effective, “Capital Match” was designed to leverage customer profile data and product details to create hyper-personalized product recommendations. This solution empowers sales teams to engage their target audience with precision, boosting customer satisfaction, increasing conversion rates, and optimizing overall marketing efforts through targeted outreach.
 
