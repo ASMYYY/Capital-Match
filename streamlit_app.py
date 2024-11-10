@@ -4,7 +4,7 @@ import requests
 import json
 
 # Load customer data from JSON
-data_path = './customer_profile.json'
+data_path = 'customer_profile.json'
 
 try:
     with open(data_path, 'r') as f:
