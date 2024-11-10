@@ -1,14 +1,17 @@
 import streamlit as st
 import pandas as pd
 import requests
+import json
 
-# Load customer data
-data_path = './CapitalOneSampleData.xlsx'
-df = pd.read_excel(data_path)
+# Load customer data from JSON
+data_path = './customer_profile.json'
+with open(data_path, 'r') as f:
+    customers = json.load(f)
+df = pd.DataFrame(customers)
 
 # Function to get customer details
 def get_customer_details(customer_id):
-    customer_row = df[df['Customer ID'] == customer_id]
+    customer_row = df[df['CustomerID'] == customer_id]
     if customer_row.empty:
         return None
     return customer_row.iloc[0]
@@ -53,17 +56,13 @@ def main():
         st.markdown("<div class='sub-title'>Personalized Product Recommendations for Customers</div>", unsafe_allow_html=True)
         
         # Search box on the main page
-        customer_id = st.text_input("Enter Customer ID or Name", placeholder="e.g., 12345 or John Doe")
+        customer_id = st.text_input("Enter Customer ID", placeholder="e.g., AlisonGaines78")
         
         # If search is triggered, go to the next page
         if st.button("🔍 Search"):
             if customer_id:
                 st.session_state.page = 2
                 st.session_state.customer_id = customer_id
-
-        # Display images below the search box
-        #st.image("./path/to/your/image1.png", caption="AI-powered tool for personalized recommendations", use_column_width=True)
-       # st.image("./path/to/your/image2.png", caption="Capital Match - Empowering Capital One's customer experience", use_column_width=True)
 
         st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>", unsafe_allow_html=True)
 
@@ -78,22 +77,22 @@ def main():
         if customer_details is not None:
             st.markdown("<div class='customer-details'>", unsafe_allow_html=True)
             st.write("### Customer Details")
-            st.write(f"**ID**: {customer_details['Customer ID']}")
-            st.write(f"**Name**: {customer_details['Customer Name']}")
-            st.write(f"**Contact**: {customer_details['Zip Code']}")
-            st.write(f"**Email**: {customer_details['Customer Name'].replace(' ', '').lower()}@example.com")
+            st.write(f"**ID**: {customer_details['CustomerID']}")
+            st.write(f"**Name**: {customer_details['FirstName']} {customer_details['LastName']}")
+            st.write(f"**Contact**: {customer_details['Phone']}")
+            st.write(f"**Email**: {customer_details['Email']}")
             st.markdown("</div>", unsafe_allow_html=True)
 
             st.markdown("<div class='products'>", unsafe_allow_html=True)
             st.write("### Existing Products")
-            existing_products = [col for col in df.columns[6:] if customer_details[col] == "Yes"]
+            existing_products = [product for product, status in customer_details.items() if status == "Yes" and product not in ['CustomerID', 'FirstName', 'LastName']]
             st.write(", ".join(existing_products) if existing_products else "No products yet.")
             st.markdown("</div>", unsafe_allow_html=True)
 
             # Fetch recommended products via API call
             st.markdown("<div class='products'>", unsafe_allow_html=True)
             st.write("### Recommended Products")
-            recommended_products = get_recommendations(customer_details['Customer ID'])
+            recommended_products = get_recommendations(customer_id)
             st.write(", ".join(recommended_products) if recommended_products else "No recommendations available.")
             st.markdown("</div>", unsafe_allow_html=True)
         else:
