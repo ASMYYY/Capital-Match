@@ -1,1 +1,8 @@
 streamlit
+uvicorn
+fastapi
+langchain-groq
+langchain
+langchain_community
+sentence_transformers
+faiss-cpu
