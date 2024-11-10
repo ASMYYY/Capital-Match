@@ -10,31 +10,23 @@ Capital Match leverages **Retrieval-Augmented Generation (RAG)** with a vector d
 We utilized **LangChain** to streamline the process of prompting and creating sequential chains, enhancing the flow and interaction between various AI models. The system features a **Streamlit dashboard** for a user-friendly interface, while **FastAPI** manages data requests and communications, ensuring smooth and efficient operations. This approach delivers precise, impactful customer targeting for sales teams. 
 
 ### 🎈 Blank app template
-
 A simple Streamlit app template for you to modify!
-
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
 ### How to run it on your own machine
-
 1. Install the requirements
-
    ```commandline
     pip install -r requirements.txt
    ```
-
 2. Run the API
     ```commandline
      uvicorn app:app
    ```
-
 3. Run the app
-
    ```commandline
     streamlit run streamlit_app.py
    ```
-
-
+   
 ## Challenges we ran into
 It was difficult to find open-source customer profile data that accurately represents real-world user behavior patterns. To overcome this, we created our own synthetic data that closely mimics real-world user behaviors and interactions, enhancing the model's training and performance.
 
