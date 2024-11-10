@@ -50,7 +50,7 @@ def main():
     if "page" not in st.session_state:
         st.session_state.page = 1
 
-    # Main Page with Search Box and Images
+    # Main Page with Search Box and Image
     if st.session_state.page == 1:
         st.markdown("<div class='main-title'>Capital Match</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-title'>Personalized Product Recommendations for Customers</div>", unsafe_allow_html=True)
@@ -63,6 +63,9 @@ def main():
             if customer_id:
                 st.session_state.page = 2
                 st.session_state.customer_id = customer_id
+
+        # Display single image below the search box
+        st.image("path/to/image1.jpg", caption="AI-powered tool for personalized recommendations", use_container_width=True)
 
         st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>", unsafe_allow_html=True)
 
