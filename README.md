@@ -11,10 +11,6 @@ Capital Match leverages **Retrieval-Augmented Generation (RAG)** with a vector d
 
 We utilized **LangChain** to streamline the process of prompting and creating sequential chains, enhancing the flow and interaction between various AI models. The system features a **Streamlit dashboard** for a user-friendly interface, while **FastAPI** manages data requests and communications, ensuring smooth and efficient operations. This approach delivers precise, impactful customer targeting for sales teams. 
 
-### 🎈 Blank app template
-A simple Streamlit app template for you to modify!
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
-
 ### How to run it on your own machine
 1. Install the requirements
    ```commandline
@@ -32,16 +28,16 @@ A simple Streamlit app template for you to modify!
 ## Challenges we ran into
 It was difficult to find open-source customer profile data that accurately represents real-world user behavior patterns. To overcome this, we created our own synthetic data that closely mimics real-world user behaviors and interactions, enhancing the model's training and performance.
 
-## Accomplishments that we're proud of
+## Accomplishments that we're proud of!
 - Successfully built and deployed a fully functional recommendation engine tailored for the needs of sales teams, capable of hyper-personalization.
 - Developed a sophisticated email drafting tool that automates the creation of compelling, highly relevant messages.
 - Created a user-friendly dashboard to help sales teams easily manage and understand their customer recommendations and communications.
 
-## What we learned
+## What we learned..
 - The power of hyper-personalization in modern sales strategies and its potential to drastically improve customer engagement and sales outcomes.
 - How to balance automation and personalization when crafting emails to avoid making them appear overly generic.
 
-## What's next for Capital Match
+## What's next for Capital Match?
 - **Advanced Predictive Analytics:** Incorporating predictive models that anticipate customers' future needs or desires based on evolving data trends.
 - **Multi-Channel Integration:** Extending personalized recommendations and messaging capabilities beyond emails to include SMS, chat, and social media campaigns.
 - **Integration with CRM Platforms:** Seamless integration with popular CRM tools to make accessing customer data and insights even more convenient.
