@@ -12,7 +12,12 @@ A simple Streamlit app template for you to modify!
    $ pip install -r requirements.txt
    ```
 
-2. Run the app
+2. Run the API
+    ```commandline
+    $ uvicorn app:app
+   ```
+
+3. Run the app
 
    ```
    $ streamlit run streamlit_app.py
