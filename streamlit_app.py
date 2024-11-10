@@ -5,9 +5,17 @@ import json
 
 # Load customer data from JSON
 data_path = './customer_profile.json'
-with open(data_path, 'r') as f:
-    customers = json.load(f)
-df = pd.DataFrame(customers)
+
+try:
+    with open(data_path, 'r') as f:
+        customers = json.load(f)
+    df = pd.DataFrame(customers)
+except FileNotFoundError:
+    st.error(f"The file '{data_path}' was not found. Please check the file path and try again.")
+    st.stop()  # Stop execution if file not found
+except json.JSONDecodeError:
+    st.error(f"The file '{data_path}' is not a valid JSON file. Please check the file contents.")
+    st.stop()
 
 # Function to get customer details
 def get_customer_details(customer_id):
@@ -65,10 +73,7 @@ def main():
                 st.session_state.customer_id = customer_id
 
         # Display single image below the search box with a corrected path
-        try:
-            st.image("image1.jpg", caption="AI-powered tool for personalized recommendations", use_container_width=True)
-        except Exception as e:
-            st.error("Could not load image. Please ensure 'image1.jpg' exists in the application directory.")
+        st.image("image1.jpg", caption="AI-powered tool for personalized recommendations", use_container_width=True)
 
         st.markdown("<div class='footer'>© 2023 Capital One | Empowered by AI-Driven Insights</div>", unsafe_allow_html=True)
 
